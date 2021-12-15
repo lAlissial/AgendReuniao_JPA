@@ -4,18 +4,21 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-
+import javax.persistence.JoinColumn;
 
 @Entity 	
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
 public class Participante  {
 	@Id		
 	private String nome; 
@@ -23,8 +26,7 @@ public class Participante  {
 	private String email;
 	
 	
-	//@ManyToMany
-	@OneToMany
+	@ManyToMany(mappedBy="participantes", cascade= {CascadeType.PERSIST, CascadeType.MERGE}, fetch= FetchType.LAZY)
 	private List <Reuniao> reunioes = new ArrayList <Reuniao> ();
 	public Participante() {
 		

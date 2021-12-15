@@ -15,6 +15,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import javax.persistence.FetchType;
+import javax.persistence.CascadeType;
+
+
 @Entity 
 
 public class Reuniao {
@@ -29,8 +33,8 @@ public class Reuniao {
 	private LocalDateTime datahora;  
 
 
-	//@ManyToMany
-	@OneToMany
+	@ManyToMany(cascade= {CascadeType.PERSIST, CascadeType.MERGE}, fetch= FetchType.LAZY)
+
 	private List <Participante> participantes = new ArrayList <Participante>();
 	
 	
