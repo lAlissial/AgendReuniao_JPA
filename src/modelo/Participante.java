@@ -16,16 +16,21 @@ import javax.persistence.OneToMany;
 
 import javax.persistence.JoinColumn;
 
+//per class --> Tabelas independentes
+//--@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
 @Entity 	
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+
 
 public class Participante  {
 	@Id		
 	private String nome; 
 	
 	private String email;
+	//o arroba id --> identifica a chave primária, o id será inicializado no banco e não deveconstar no construtor
 	
-	
+	//mappedby -->Mapeia a referência inversa do relacionamentobidirecional
 	@ManyToMany(mappedBy="participantes", cascade= {CascadeType.PERSIST, CascadeType.MERGE}, fetch= FetchType.LAZY)
 	private List <Reuniao> reunioes = new ArrayList <Reuniao> ();
 	public Participante() {

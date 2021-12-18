@@ -31,9 +31,14 @@ public class DAOReuniao extends DAO<Reuniao> {
 	
 	//B. Quais as reuniões que tem algum convidado?
 	public List<Reuniao> consultaB() {
-		TypedQuery<Reuniao> q = manager.createQuery("select distinct r from Convidado c join c.reunioes r", Reuniao.class);
-		return q.getResultList();	
-		//TypedQuery<Reuniao> q = manager.createQuery("select distinct r from Reuniao r join r.participantes w where TYPE(w) IN (Convidado)", Reuniao.class);
+		try {
+            TypedQuery<Reuniao> q = manager.createQuery("select distinct r from Convidado c join c.reunioes r", Reuniao.class);
+            return q.getResultList();    
+        }
+        catch (NoResultException e) {
+            return null;
+        }
+		
 	}
 
 

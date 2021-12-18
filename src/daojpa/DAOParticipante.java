@@ -39,8 +39,10 @@ public class DAOParticipante extends DAO<Participante>{
 	
 	public List<Participante> consultaA(String nomez, int mes) {
 		
-		TypedQuery<Participante> q = manager.createQuery("select distinct p from Participante p join p.reunioes r where (substring(cast(r.datahora as text),6,2)=:x) and (((r.id in (select distinct re.id from Participante pa join pa.reunioes re where pa.nome='"+nomez+"')) or (r.id in (select distinct reu.id from Convidado co join co.reunioes reu where co.nome='"+nomez+"'))))", Participante.class);
+		//TypedQuery<Participante> q = manager.createQuery("select distinct p from Participante p join p.reunioes r where (substring(cast(r.datahora as text),6,2)=:x) and (((r.id in (select distinct re.id from Participante pa join pa.reunioes re where pa.nome='"+nomez+"')) or (r.id in (select distinct reu.id from Convidado co join co.reunioes reu where co.nome='"+nomez+"'))))", Participante.class);
+		TypedQuery<Participante> q = manager.createQuery("select distinct p from Participante p join p.reunioes r join r.participantes par where (substring(cast(r.datahora as text),6,2)=:x) and par.nome='"+nomez+"'", Participante.class);
 		q.setParameter("x", Integer.toString(mes));
+		//q.setParameter("y", nomez);
 		return q.getResultList();
 	}
 	

@@ -18,17 +18,19 @@ import javax.persistence.OneToMany;
 import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
 
-
+//O Mapeamento Objeto-Relacional - MOR (ORM) é feito de forma explícita com uso de anotações (@) antes da classe ou dos atributos
+//sinaliza que a classe é persistente
 @Entity 
 
 public class Reuniao {
-	@Id		
+	@Id		 
 	@GeneratedValue (strategy=GenerationType.IDENTITY)
-	private int id;         // será autoincrementado dentro do  metodo create() no DAOreuniao 
+	private int id;         
 
 	private String assunto;
-
+	// o generated value --> especifica uma coluna autoincrementada automaticamente pelo banco
 	
+	//Especifica-se o tipo sql da coluna da tabela
 	@Column(columnDefinition = "TIMESTAMP")
 	private LocalDateTime datahora;  
 

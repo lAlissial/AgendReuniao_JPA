@@ -10,7 +10,8 @@ import modelo.Participante;
 
 @Entity
 
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+//estratégia só no pai
 
 public class Convidado extends Participante {
 	
